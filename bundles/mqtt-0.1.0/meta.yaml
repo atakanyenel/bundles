@@ -1,0 +1,11 @@
+name: mqtt
+version: 0.1.0
+description: "A simple mqtt app"
+displayName: "Mqtt bundle"
+tags: mqtt
+labels:
+  showcase: "true"
+providerDisplayName: Atakan Yenel
+longDescription: "A simple mqtt app that sends events to kyma"
+bindable: false
+planUpdatable: true

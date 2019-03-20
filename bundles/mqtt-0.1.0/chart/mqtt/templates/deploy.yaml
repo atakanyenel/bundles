@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: { { template "testing.fullname" . } }
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: { { template "testing.fullname" . } }
+    spec:
+      containers:
+        - name: mqtt-event-bridge
+          image: "gcr.io/sap-hybris-sf-playground/sample/mqtt-event-bridge"
