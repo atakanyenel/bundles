@@ -1,11 +1,13 @@
 name: mqtt
 version: 0.1.0
 description: "A simple mqtt app"
+id: faebbe18-0a84-11e9-ab14-d663bd873d94
 displayName: "Mqtt bundle"
 tags: mqtt
 labels:
   showcase: "true"
 providerDisplayName: Atakan Yenel
 longDescription: "A simple mqtt app that sends events to kyma"
+imageURL: https://www.openautomationsoftware.com/wp-content/uploads/2016/05/MQTT-icon.png
 bindable: false
-planUpdatable: true
+provisionOnlyOnce: true

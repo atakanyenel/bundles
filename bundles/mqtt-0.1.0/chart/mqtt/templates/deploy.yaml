@@ -1,16 +1,48 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: { { template "testing.fullname" . } }
+  name: {{ template "mqtt.fullname" . }}
 spec:
   replicas: 1
   template:
     metadata:
+      labels:
+        app: {{ template "mqtt.fullname" . }}
       annotations:
         sidecar.istio.io/inject: "true"
-      labels:
-        app: { { template "testing.fullname" . } }
     spec:
       containers:
-        - name: mqtt-event-bridge
-          image: "gcr.io/sap-hybris-sf-playground/sample/mqtt-event-bridge"
+        - env:
+            - name: EVENT_ENDPOINT
+              value: http://core-publish.kyma-system:8080/v1/events
+            - name: SOURCE_ID
+              value: sap-marketing-cc2
+          image: "gcr.io/sap-sekymaongcpmarketplace/bundles/mqtt-event-bridge"
+          imagePullPolicy: Always
+          name: mqtt-event-bridge
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ template "mqtt.fullname" . }}
+  labels:
+    app: {{ template "mqtt.fullname" . }}
+spec:
+  selector:
+    app: {{ template "mqtt.fullname" . }}
+  ports:
+    - port: 8080
+      name: http
+---
+apiVersion: gateway.kyma-project.io/v1alpha2
+kind: Api
+metadata:
+  name: {{ template "mqtt.fullname" . }}
+  labels:
+    app: {{ template "mqtt.fullname" . }}
+spec:
+  authentication: []
+  hostname: {{ template "mqtt.fullname" . }}
+  service:
+    name: {{ template "mqtt.fullname" . }}
+    port: 8080

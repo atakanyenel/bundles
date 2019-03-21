@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "hostname": {
+      "type": "string",
+      "title": "Hostname",
+      "description": "Hostname of the Marketing instance we are registering"
+    },
+    "auth_username": {
+      "type": "string",
+      "title": "Basic Auth Username",
+      "description": "Username for the Communication User on Marketing. This is the Communication User that must be already created on the Marketing System and used for all of the Communication Arrangements (used to expose APIs) we want to register with Kyma/XF"
+    },
+    "auth_password": {
+      "type": "string",
+      "title": "Basic Auth Password",
+      "description": "Password for the Communication User on Marketing"
+    },
+    "oauth2_client_id": {
+      "type": "string",
+      "title": "Oauth2 client_id",
+      "description": "client_id for the Oauth2 server that we will deploy. The oauth2 credentials will need to be used when configuring <redacted> Communication Scenario"
+    },
+    "oauth2_client_secret": {
+      "type": "string",
+      "title": "OAuth2 client_secret",
+      "description": "client_id for the Oauth2 server"
+    },
+    "application_name": {
+      "type": "string",
+      "title": "Application Name",
+      "description": "Name of the Application CR that we created for the Marketing system. We use it for the sourceId when sending events to the event bus and when registering the APIs"
+    }
+  },
+  "required": [
+    "hostname"
+  ]
+}
